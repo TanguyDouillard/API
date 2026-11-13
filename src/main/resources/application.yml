@@ -1,1 +1,12 @@
-spring.application.name=API
+spring:
+  application:
+    name: polytech
+  datasource:
+    url: jdbc:mariadb://localhost:3306/exemple
+    username: root
+    password: api_rest
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
