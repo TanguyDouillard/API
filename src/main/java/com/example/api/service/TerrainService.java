@@ -1,7 +1,7 @@
 package com.example.api.service;
 
-import com.example.api.entity.Utilisateur;
-import com.example.api.repository.UtilisateurRepository;
+import com.example.api.entity.Terrain;
+import com.example.api.repository.TerrainRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,29 +9,28 @@ import java.util.List;
 @Service
 public class TerrainService {
 
+    private final TerrainRepository repository;
 
-    private final UtilisateurRepository repository;
-
-    public TerrainService(UtilisateurRepository repository){
+    public TerrainService(TerrainRepository repository){
         this.repository = repository;
     }
 
-    public Utilisateur create(Utilisateur utilisateur) {
-        utilisateur.setId(null);
-        return repository.save(utilisateur);
+    public Terrain create(Terrain terrain) {
+        terrain.setId(null);
+        return repository.save(terrain);
     }
 
-    public Utilisateur getById(Integer id){
+    public Terrain getById(Integer id){
         return repository.findById(id).orElseThrow();
     }
 
-    public List<Utilisateur> getAll() {
+    public List<Terrain> getAll() {
         return repository.findAll();
     }
 
-    public Utilisateur update(Integer id, Utilisateur utilisateur) {
-        utilisateur.setId(id);
-        return repository.save(utilisateur);
+    public Terrain update(Integer id, Terrain terrain) {
+        terrain.setId(id);
+        return repository.save(terrain);
     }
 
     public void delete(Integer id) {
