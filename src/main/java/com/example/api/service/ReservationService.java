@@ -3,6 +3,7 @@ package com.example.api.service;
 import com.example.api.entity.Reservation;
 import com.example.api.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
+import com.example.api.exception.*;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ReservationService {
     }
 
     public Reservation getById(Integer id){
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Terrain introuvable avec l'id : " + id));
     }
 
     public List<Reservation> getAll() {
@@ -29,11 +30,17 @@ public class ReservationService {
     }
 
     public Reservation update(Integer id, Reservation reservation) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Utilisateur introuvable avec l'id : " + id);
+        }
         reservation.setId(id);
         return repository.save(reservation);
     }
 
     public void delete(Integer id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Utilisateur introuvable avec l'id : " + id);
+        }
         repository.deleteById(id);
     }
 }
